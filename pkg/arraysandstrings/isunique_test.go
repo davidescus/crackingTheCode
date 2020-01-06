@@ -2,9 +2,9 @@ package arraysandstrings
 
 import "testing"
 
-var result bool
+var resultIsUnique bool
 
-type testData struct {
+type testDataIsUniqueCharacters struct {
 	Name   string
 	Val    string
 	Exp    bool
@@ -12,7 +12,7 @@ type testData struct {
 }
 
 func TestIsUniqueCharactersIterative(t *testing.T) {
-	for _, tc := range getTestData() {
+	for _, tc := range getTestDataIsUniqueCharacters() {
 		t.Run(tc.Name, func(t *testing.T) {
 			got, err := IsUniqueCharactersIterative(tc.Val)
 			if tc.HasErr && err == nil {
@@ -26,7 +26,7 @@ func TestIsUniqueCharactersIterative(t *testing.T) {
 }
 
 func TestIsUniqueCharactersMemorize(t *testing.T) {
-	for _, tc := range getTestData() {
+	for _, tc := range getTestDataIsUniqueCharacters() {
 		t.Run(tc.Name, func(t *testing.T) {
 			got, err := IsUniqueCharactersMemorize(tc.Val)
 			if tc.HasErr && err == nil {
@@ -41,24 +41,24 @@ func TestIsUniqueCharactersMemorize(t *testing.T) {
 
 func BenchmarkIsUniqueCharactersIterative(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for _, tc := range getTestData() {
+		for _, tc := range getTestDataIsUniqueCharacters() {
 			res, _ := IsUniqueCharactersIterative(tc.Val)
-			result = res
+			resultIsUnique = res
 		}
 	}
 }
 
 func BenchmarkIsUniqueCharactersMemorize(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for _, tc := range getTestData() {
+		for _, tc := range getTestDataIsUniqueCharacters() {
 			res, _ := IsUniqueCharactersMemorize(tc.Val)
-			result = res
+			resultIsUnique = res
 		}
 	}
 }
 
-func getTestData() []testData {
-	return []testData{
+func getTestDataIsUniqueCharacters() []testDataIsUniqueCharacters {
+	return []testDataIsUniqueCharacters{
 		{
 			"IllegalEncodingUTF8-unique",
 			"\x80日本語漢字かんじ",
